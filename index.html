@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <script src="color-modes.js"></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent" />
+    <link
+      rel="icon"
+      href="https://yashkumat.github.io/Pavitra-saree-invoicer/icon.png"
+      type="image/png"
+      sizes="16x16" />
+    <meta
+      name="keywords"
+      content="InvoiceGenerator, EasyInvoicing, Pavitra Sarees, Ghoti, Jyostana Kumat" />
+    <meta name="author" content="Yash Kumat" />
+    <meta property="og:title" content="Pavitra Sarees - Invoicer" />
+    <meta property="og:type" content="Fashion App" />
+    <meta
+      property="og:image"
+      content="https://yashkumat.github.io/Pavitra-saree-invoicer/icon.png" />
+    <meta
+      property="og:url"
+      content="https://yashkumat.github.io/Pavitra-saree-invoicer/" />
+    <meta
+      name="description"
+      content="Create professional invoices effortlessly with our user-friendly application!" />
+
+    <title>Pokharna Industries - Invoicer</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+
+    <link href="bootstrap.min.css" rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        #productDescription {
+          font-size: small !important;
+        }
+        #pdf canvas {
+          border: 1px solid black;
+          width: 95%;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, 0.1);
+        border: solid rgba(0, 0, 0, 0.15);
+        border-width: 1px 0;
+        box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+          inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -0.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+
+      #pdf {
+        text-align: center;
+      }
+
+      #pdf canvas {
+        border: 1px solid black;
+        width: 80%;
+      }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="checkout.css" rel="stylesheet" />
+  </head>
+  <body class="bg-body-tertiary">
+    <!-- Dark Mode -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+      <symbol id="check2" viewBox="0 0 16 16">
+        <path
+          d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+      </symbol>
+      <symbol id="circle-half" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
+      </symbol>
+      <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+        <path
+          d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
+        <path
+          d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" />
+      </symbol>
+      <symbol id="sun-fill" viewBox="0 0 16 16">
+        <path
+          d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
+      </symbol>
+    </svg>
+    <div
+      class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+      <button
+        class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+        id="bd-theme"
+        type="button"
+        aria-expanded="false"
+        data-bs-toggle="dropdown"
+        aria-label="Toggle theme (auto)">
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
+          <use href="#circle-half"></use>
+        </svg>
+        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+      </button>
+      <ul
+        class="dropdown-menu dropdown-menu-end shadow"
+        aria-labelledby="bd-theme-text">
+        <li>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center"
+            data-bs-theme-value="light"
+            aria-pressed="false">
+            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+              <use href="#sun-fill"></use>
+            </svg>
+            Light
+            <svg class="bi ms-auto d-none" width="1em" height="1em">
+              <use href="#check2"></use>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center"
+            data-bs-theme-value="dark"
+            aria-pressed="false">
+            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+              <use href="#moon-stars-fill"></use>
+            </svg>
+            Dark
+            <svg class="bi ms-auto d-none" width="1em" height="1em">
+              <use href="#check2"></use>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center active"
+            data-bs-theme-value="auto"
+            aria-pressed="true">
+            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+              <use href="#circle-half"></use>
+            </svg>
+            Auto
+            <svg class="bi ms-auto d-none" width="1em" height="1em">
+              <use href="#check2"></use>
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+      <!-- Main Body -->
+      <main>
+        <!-- Hero Section -->
+        <section class="pt-3 text-center" id="heroSection">
+          <h2 class="text-primary">Pokharna Industries</h2>
+          <p class="lead" id="productDescription">
+            🚀 Instant Invoice 🌐 Anywhere, Anytime
+          </p>
+          <hr />
+        </section>
+
+        <!-- Customer Bill Section -->
+        <section id="billSection">
+          <div class="row">
+            <div class="col-md-12">
+              <h4
+                class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-primary">Customer Bill</span>
+                <span class="badge bg-primary rounded-pill" id="totalItemsCount"
+                  >0</span
+                >
+              </h4>
+            </div>
+            <div class="col-md-12">
+              <ul class="list-group mb-3" id="productList">
+                <li
+                  class="list-group-item d-flex justify-content-between lh-sm"
+                  onclick="goToAddItem()">
+                  <h6 class="my-0">No items in the bill. Add Items!</h6>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Add Product From -->
+        <section id="addItemSection">
+          <form class="product" id="product">
+            <div class="row g-1" id="addItemForm">
+              <hr />
+              <div class="col-md-12 text-end">
+                <h5>Add Item</h5>
+              </div>
+              <div class="col-md-6">
+                <input
+                  name="productName"
+                  type="text"
+                  class="form-control"
+                  id="productName"
+                  placeholder="Name" />
+              </div>
+
+              <div class="col-md-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productPrice"
+                  placeholder="Price"
+                  onkeypress="return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)"
+                  name="productPrice" />
+              </div>
+              <div class="col-md-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productQuantity"
+                  onkeypress="return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)"
+                  placeholder="Quantity" />
+              </div>
+
+              <div class="col-md-12 text-center mt-3" id="actionPanel">
+                <button
+                  class="btn btn-success btn-sm"
+                  type="button"
+                  id="addItemToBillButton"
+                  onclick="addItemToBill()">
+                  <span>Add <i class="bi bi-file-earmark-plus"></i></span>
+                </button>
+                <button
+                  class="btn btn-danger btn-sm d-none"
+                  type="button"
+                  id="deletebutton"
+                  onclick="deleteItem()">
+                  Delete <i class="bi bi-trash"></i>
+                </button>
+                <button
+                  class="btn btn-primary btn-sm d-none"
+                  type="button"
+                  id="addCustomer"
+                  onclick="openCustomerForm()">
+                  Next <i class="bi bi-arrow-bar-right"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          <hr />
+        </section>
+
+        <!-- Add Customer Form -->
+        <section id="addCustomerSection" class="d-none">
+          <hr class="my-3" />
+          <div class="row">
+            <div class="col-md-12 text-end">
+              <h5>Customer Details</h5>
+            </div>
+            <div class="col-md-12">
+              <form>
+                <div class="row g-1">
+                  <div class="col-md-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="customerName"
+                      placeholder="Name" />
+                  </div>
+                  <div class="col-md-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="customerNumber"
+                      placeholder="Number"
+                      maxlength="10"
+                      onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" />
+                  </div>
+                  <div class="col-md-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="customerAddress"
+                      placeholder="Address" />
+                  </div>
+                  <div class="col-md-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="customerGST"
+                      placeholder="GST"
+                      maxlength="15"
+                      style="text-transform: uppercase" />
+                  </div>
+                  <div class="col-md-12 text-center">
+                    <button
+                      class="btn btn-danger mt-3 btn-sm"
+                      type="button"
+                      id="renderInvoice"
+                      onclick="backToAddItem()">
+                      <i class="bi bi-arrow-bar-left"></i> Back
+                    </button>
+                    <button
+                      class="btn btn-success mt-3 btn-sm"
+                      type="button"
+                      id="renderInvoice"
+                      onclick="generateInvoice()">
+                      Generate Invoice <i class="bi bi-receipt-cutoff"></i>
+                    </button>
+                    <hr />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- Invoice Preview & Download -->
+        <section id="invoiceSection" class="d-none">
+          <hr />
+          <div class="row">
+            <div class="col-md-12 text-end">
+              <h4 class="mb-3">Invoice</h4>
+              <div id="pdf"></div>
+            </div>
+            <div class="col-md-12 text-center">
+              <button
+                class="btn btn-danger mt-3 btn-sm"
+                type="button"
+                id="renderInvoice"
+                onclick="backToAddCustomer()">
+                <i class="bi bi-arrow-bar-left"></i> Back
+              </button>
+              <button
+                class="btn btn-primary btn-sm mt-3"
+                type="button"
+                id="downloadInvoice"
+                onclick="downloadInvoice()">
+                Download Invoice <i class="bi bi-filetype-pdf"></i>
+              </button>
+              <button
+                class="btn btn-primary btn-sm mt-3 d-none"
+                type="button"
+                id="newBillButton"
+                onclick="newBill()">
+                New Bill <i class="bi bi-file-earmark-plus-fill"></i>
+              </button>
+              <hr />
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="my-5 text-body-secondary text-center text-small">
+        <p class="mb-1">Product by <a href="www.yashk.in">yashk.in</a>, 2023</p>
+      </footer>
+    </div>
+
+    <script src="https://unpkg.com/easyinvoice/dist/easyinvoice.min.js"></script>
+    <script src="https://unpkg.com/pdfjs-dist@2.3.200/build/pdf.min.js"></script>
+
+    <script>
+      let cart = [];
+      let customer = {};
+
+      function goToAddItem() {
+        document.getElementById("addItemSection").scrollIntoView();
+      }
+
+      function backToAddItem() {
+        let customerForm = document.getElementById("addCustomerSection");
+        customerForm.classList.add("d-none");
+
+        let itemsForm = document.getElementById("addItemSection");
+        itemsForm.classList.remove("d-none");
+      }
+
+      function backToAddCustomer() {
+        let customerForm = document.getElementById("addCustomerSection");
+        customerForm.classList.remove("d-none");
+        let invoiceSection = document.getElementById("invoiceSection");
+        invoiceSection.classList.add("d-none");
+      }
+
+      function newBill() {
+        location.reload();
+      }
+
+      // Add item to bill
+      function addItemToBill() {
+        let validated = false;
+        var element = {};
+        element.description = document.getElementById("productName").value;
+        element.price = document.getElementById("productPrice").value;
+        element.quantity = document.getElementById("productQuantity").value;
+        element["tax-rate"] = 0;
+
+        if (element.description && element.price && element.quantity) {
+          cart.push(element);
+          buildCart();
+          document
+            .getElementById("productName")
+            .classList.remove("border-danger");
+          document
+            .getElementById("productPrice")
+            .classList.remove("border-danger");
+          document
+            .getElementById("productQuantity")
+            .classList.remove("border-danger");
+          document.getElementById("product").reset();
+        } else {
+          if (element.description == "") {
+            document
+              .getElementById("productName")
+              .classList.add("border-danger");
+          } else {
+            document
+              .getElementById("productName")
+              .classList.remove("border-danger");
+          }
+          if (element.price == "") {
+            document
+              .getElementById("productPrice")
+              .classList.add("border-danger");
+          } else {
+            document
+              .getElementById("productPrice")
+              .classList.remove("border-danger");
+          }
+          if (element.quantity == "") {
+            document
+              .getElementById("productQuantity")
+              .classList.add("border-danger");
+          } else {
+            document
+              .getElementById("productQuantity")
+              .classList.remove("border-danger");
+          }
+        }
+
+        document.getElementById("billSection").scrollIntoView();
+      }
+
+      function openCustomerForm() {
+        window.scrollTo(0, document.body.scrollHeight / 2);
+
+        let customerForm = document.getElementById("addCustomerSection");
+        customerForm.classList.remove("d-none");
+
+        let itemsForm = document.getElementById("addItemSection");
+        itemsForm.classList.add("d-none");
+      }
+      // build Cart
+      function buildCart() {
+        let itemsList = document.getElementById("productList");
+
+        itemsList.innerHTML = "";
+
+        if (cart.length == 0) {
+          itemsList.innerHTML = `
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <h6 class="my-0">No items in the bill!</h6>
+                </li>`;
+        } else {
+          cart.forEach((item, key) => {
+            var iDiv = document.createElement("li");
+            iDiv.className =
+              "list-group-item d-flex justify-content-between lh-sm";
+            iDiv.innerHTML = `
+                  <div onclick="editItem(${key})">
+                    <h6 class="my-0"><b>${key + 1}.</b> ${item.description}</h6>
+                    <small class="text-body-secondary">Quantity: ${
+                      item.quantity
+                    } | Price: ${item.price}</small>
+                  </div>
+                  <span class="text-body-secondary">Rs. ${
+                    item.quantity * item.price
+                  }</span>`;
+
+            itemsList.appendChild(iDiv);
+          });
+
+          let total = cart
+            .map((item) => item.price * item.quantity)
+            .reduce((total, num) => total + num, 0);
+
+          var iDiv = document.createElement("li");
+
+          iDiv.className =
+            "list-group-item d-flex justify-content-between my-1";
+          iDiv.innerHTML = `
+                  <h5>Total: Rs. ${total}</h5>
+                  `;
+
+          itemsList.appendChild(iDiv);
+
+          let customerForm = document.getElementById("addCustomer");
+          customerForm.classList.remove("d-none");
+        }
+
+        document.getElementById("totalItemsCount").innerHTML = cart.length;
+      }
+
+      // Show update from
+      function editItem(id) {
+        let item = cart[id];
+
+        // change name and function of button
+        document.getElementById(
+          "addItemToBillButton"
+        ).innerHTML = `Save <i class="bi bi-file-earmark-plus"></i>`;
+        document.getElementById("addItemToBillButton").onclick = function () {
+          updateItem(id);
+        };
+
+        // Previous values
+        document.getElementById("productName").value = item.description;
+        document.getElementById("productPrice").value = item.price;
+        document.getElementById("productQuantity").value = item.quantity;
+
+        // Show delete button
+        let deleteButtonDiv = document.getElementById("deletebutton");
+        deleteButtonDiv.classList.remove("d-none");
+        deleteButtonDiv.onclick = function () {
+          deleteItem(id);
+        };
+
+        document.getElementById(
+          "addCustomer"
+        ).innerHTML = `Cancel <i class="bi bi-x-lg"></i>`;
+        document.getElementById("addCustomer").onclick = function () {
+          cancelProcess();
+        };
+      }
+
+      function cancelProcess() {
+        // Change name and function of button
+        document.getElementById("addItemToBillButton").onclick = function () {
+          addItemToBill();
+        };
+        document.getElementById(
+          "addItemToBillButton"
+        ).innerHTML = `Add <i class="bi bi-file-earmark-plus"></i>`;
+
+        // Hide delete button
+        let deleteButtonDiv = document.getElementById("deletebutton");
+        deleteButtonDiv.classList.add("d-none");
+
+        document.getElementById(
+          "addCustomer"
+        ).innerHTML = `Next <i class="bi bi-arrow-bar-right"></i>`;
+        document.getElementById("addCustomer").onclick = function () {
+          openCustomerForm();
+        };
+
+        document.getElementById("product").reset();
+      }
+
+      // update item
+      function updateItem(id) {
+        let element = cart[id];
+        element.description = document.getElementById("productName").value;
+        element.price = document.getElementById("productPrice").value;
+        element.quantity = document.getElementById("productQuantity").value;
+
+        buildCart();
+
+        // Change name and function of button
+        document.getElementById("addItemToBillButton").onclick = function () {
+          addItemToBill();
+        };
+        document.getElementById(
+          "addItemToBillButton"
+        ).innerHTML = `Add <i class="bi bi-file-earmark-plus"></i>`;
+
+        // Hide delete button
+        let deleteButtonDiv = document.getElementById("deletebutton");
+        deleteButtonDiv.classList.add("d-none");
+
+        document.getElementById(
+          "addCustomer"
+        ).innerHTML = `Next <i class="bi bi-arrow-bar-right"></i>`;
+        document.getElementById("addCustomer").onclick = function () {
+          openCustomerForm();
+        };
+
+        document.getElementById("product").reset();
+      }
+
+      // Delete item from list
+      function deleteItem(id) {
+        let value = cart[id];
+
+        cart = cart.filter(function (item) {
+          return item !== value;
+        });
+
+        buildCart();
+
+        let deleteButtonDiv = document.getElementById("deletebutton");
+        deleteButtonDiv.classList.add("d-none");
+
+        document.getElementById("addItemToBillButton").innerHTML = "Add";
+        document.getElementById("addItemToBillButton").onclick = function () {
+          addItemToBill();
+        };
+
+        if (cart.length > 0) {
+          document.getElementById(
+            "addCustomer"
+          ).innerHTML = `Next <i class="bi bi-arrow-bar-right"></i>`;
+          document.getElementById("addCustomer").onclick = function () {
+            openCustomerForm();
+          };
+        } else {
+          document.getElementById("addCustomer").classList.add("d-none");
+        }
+
+        document.getElementById("product").reset();
+      }
+
+      // get Clent details
+      function getClient() {
+        customer.company = document.getElementById("customerName").value;
+        customer.city = document.getElementById("customerGST").value;
+        customer["custom1"] = document.getElementById("customerNumber").value;
+        customer.address = document.getElementById("customerAddress").value;
+
+        if (customer.city) {
+          customer.zip = "GST NO.";
+        } else {
+          if (customer["custom1"]) {
+            customer.zip = document.getElementById("customerNumber").value;
+            customer["custom1"] = "";
+          } else {
+            customer.zip = customer.address;
+            customer.address = "";
+          }
+        }
+
+        return customer;
+      }
+
+      // Get invoice
+      function getInvoice() {
+        var data = getBillData();
+        easyinvoice.createInvoice(data, function (result) {
+          document.getElementById("invoiceBase64").innerText = result.pdf;
+        });
+      }
+
+      // Generate Invoice
+      function generateInvoice() {
+        window.scrollTo(0, document.body.scrollHeight / 2);
+        document.getElementById("billSection").scrollIntoView();
+
+        let customer_name = document.getElementById("customerName").value;
+        if (customer_name === "") {
+          document
+            .getElementById("customerName")
+            .classList.add("border-danger");
+        } else {
+          document
+            .getElementById("customerName")
+            .classList.remove("border-danger");
+
+          let invoiceSection = document.getElementById("invoiceSection");
+          invoiceSection.classList.remove("d-none");
+
+          let customerSection = document.getElementById("addCustomerSection");
+          customerSection.classList.add("d-none");
+
+          var data = getBillData();
+          document.getElementById("pdf").innerHTML = `
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        `;
+          easyinvoice.createInvoice(data, function (result) {
+            easyinvoice.render("pdf", result.pdf);
+          });
+        }
+      }
+
+      // Download invoice
+      function downloadInvoice() {
+        window.scrollTo(0, document.body.scrollHeight / 2);
+        document.getElementById("newBillButton").classList.remove("d-none");
+        var data = getBillData();
+        var invoice_name = customer.company + "_" + getDate();
+        easyinvoice.createInvoice(data, function (result) {
+          easyinvoice.download(invoice_name, result.pdf);
+        });
+      }
+
+      // Bill data - item & customer
+      function getBillData() {
+        getClient();
+        return {
+          images: {
+            logo: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fin.linkedin.com%2Fin%2Frishi-pokharna-a8a713274&psig=AOvVaw00hXJx0JblF0AK5GERhqX7&ust=1700233678663000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPjntZXmyIIDFQAAAAAdAAAAABAI",
+          },
+          sender: {
+            company: "Pokharna Industries",
+            address: "Old Agra Road, Ghoti",
+            zip: "GST NO.",
+            city: "27AOUPK8657H3ZI",
+            custom1: "9226331577",
+          },
+          client: customer,
+          information: {
+            number: getBillNumber(),
+            date: getDate(),
+            "due-date": getDueDate(),
+          },
+          products: cart,
+          "bottom-notice":
+            "We appreciate your business and thank you for choosing Pavitra Sarees.",
+          settings: {
+            currency: "INR",
+          },
+        };
+      }
+
+      // Todays date
+      function getDate() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, "0");
+        var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+        var yyyy = today.getFullYear();
+        today = dd + "-" + mm + "-" + yyyy;
+        return today;
+      }
+
+      // Date after 15 days
+      function getDueDate() {
+        var dueDate = new Date(new Date().getTime() + 15 * 24 * 60 * 60 * 1000);
+        var dd = String(dueDate.getDate()).padStart(2, "0");
+        var mm = String(dueDate.getMonth() + 1).padStart(2, "0"); //January is 0!
+        var yyyy = dueDate.getFullYear();
+        dueDate = dd + "-" + mm + "-" + yyyy;
+        return dueDate;
+      }
+
+      // Bill number based on current time
+      function getBillNumber() {
+        var today = new Date();
+        let hour = today.getHours();
+        let minutes = today.getMinutes();
+        let seconds = today.getSeconds();
+
+        let bill_number = hour + "" + minutes + "" + seconds;
+        return bill_number;
+      }
+    </script>
+    <script src="bootstrap.bundle.min.js"></script>
+  </body>
+</html>
